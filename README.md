@@ -22,25 +22,28 @@ npm run dev
 2. Set up the frontend in a second terminal:
 
 ```powershell
-cd frontend
+cd frontend\v0-ktv-management-frontend
 Copy-Item .env.example .env
 npm install
 npm run dev
 ```
 
-3. Open the frontend URL shown by Vite, usually `http://localhost:5173`.
+3. Open the frontend URL shown by Vite, usually `http://localhost:3000`.
 
 4. Verify the backend health endpoint at `http://localhost:5000/api/health`.
+
+During local development, the React app calls `/api/*`. Vite proxies those
+requests to the Express backend at `http://localhost:5000`.
 
 ## Environment Files
 
 - [backend/.env.example](./backend/.env.example) contains every backend variable currently read by `src/config/env.js`
-- [frontend/.env.example](./frontend/.env.example) contains every frontend runtime variable currently read by `src/services/apiClient.js`
+- [frontend/v0-ktv-management-frontend/.env.example](./frontend/v0-ktv-management-frontend/.env.example) contains the frontend API and proxy variables
 - copy each example to `.env` before starting the app
 
 ## Frontend Setup
 
-1. Open a terminal in [frontend](./frontend).
+1. Open a terminal in [frontend/v0-ktv-management-frontend](./frontend/v0-ktv-management-frontend).
 2. Install dependencies:
 
 ```bash
@@ -59,7 +62,7 @@ If you are using PowerShell:
 Copy-Item .env.example .env
 ```
 
-4. Update `VITE_API_BASE_URL` in `.env` if your backend is not running on `http://localhost:5000/api`.
+4. Keep `VITE_API_BASE_URL=/api` when using the Vite proxy. Update `VITE_BACKEND_URL` only if your backend is not running on `http://localhost:5000`.
 5. Start the frontend:
 
 ```bash
@@ -69,7 +72,7 @@ npm run dev
 6. Open the Vite local URL shown in the terminal, typically:
 
 ```text
-http://localhost:5173
+http://localhost:3000
 ```
 
 Frontend architecture notes:
@@ -190,7 +193,7 @@ npm test
 Frontend:
 
 ```bash
-cd frontend
+cd frontend/v0-ktv-management-frontend
 npm run build
 ```
 
